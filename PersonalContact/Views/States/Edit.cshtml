@@ -1,0 +1,49 @@
+﻿@model PersonalContact.Models.State
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit State</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group row mb-2">
+                <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label asp-for="Capital" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                <input asp-for="Capital" class="form-control" />
+                <span asp-validation-for="Capital" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <label asp-for="Country.CountryName" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row mb-2">
+                <input type="submit" value="Save" class="btn btn-primary  mb-2 mt-2" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

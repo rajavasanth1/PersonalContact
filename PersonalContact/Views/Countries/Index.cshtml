@@ -1,0 +1,76 @@
+﻿@model IEnumerable<PersonalContact.Models.Country>
+@* @model PersonalContact.PageList<PersonalContact.Models.Country> *@
+
+@{
+    ViewData["Title"] = "Countries";
+
+    Pager pager= new Pager();
+    int pageNo = 0;
+    if(ViewBag.Pager!=null )
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+
+<h1>Countries</h1>
+
+<p>
+    <a asp-action="Create"><button class="btn btn-primary">Create New</button></a>
+</p>
+<div class="col-4 p-0 justify-content-end mt-1 mb-2">
+    <form asp-action="index">
+        <span class="btn-group">
+            <input class="form-control" type="text" name="SearchText" value="@ViewBag.SearchText"/>
+            <input class="p1 ml-8 btn btn-sm btn-danger" style="border-radius:10px;" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
+<table class="table table-success">
+    <thead>
+        <tr>
+            <th class="p-3 mb-2 bg-secondary text-white">
+                @Html.ActionLink("Country", "Index", new { sortField = "CountryName", currentSortField = ViewBag.SortField, currentSortOrder = ViewBag.SortOrder, currentFilter = ViewBag.CurrentFilter}, new { @class = "linkclass" })
+               @*  @Html.DisplayNameFor(model => model.CountryName) *@
+            </th>
+            <th class="p-3 mb-2 bg-secondary text-white">
+                @Html.ActionLink("Capital", "Index", new { sortField = "Capital", currentSortField = ViewBag.SortField, currentSortOrder = ViewBag.SortOrder, currentFilter = ViewBag.CurrentFilter }, new { @class = "linkclass" })
+                @* @Html.DisplayNameFor(model => model.Capital) *@
+            </th>
+            <th class="p-3 mb-2 bg-secondary text-white"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Capital)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+      
+    </tbody>
+</table>
+<div class="container ">
+    @if(pager.TotalPages >0)
+    {
+        <ul class="pagination justify-content-end ">
+
+            @for(var pge=pager.StartPage; pge<=pager.EndPage;pge++)
+            {
+                <li class="pge-item @(pge==pager.CurrentPage ?"active":"")">
+                    <a class="page-link" asp-controller="Countries" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                </li>
+            }
+
+        </ul>
+    }
+</div>

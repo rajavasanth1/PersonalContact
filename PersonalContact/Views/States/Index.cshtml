@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PersonalContact.Models.State>
+
+@{
+    ViewData["Title"] = "States";
+}
+
+<h1>States</h1>
+
+<p>
+    <a asp-action="Create"><button class="btn btn-primary">Create New</button></a>
+</p>
+<div class="col-4 p-0 justify-content-end mt-1 mb-2">
+    <form asp-action="index">
+        <span class="btn-group">
+            <input class="form-control" type="text" name="SearchText" value="@ViewBag.SearchText" />
+            <input class="p1 ml-8 btn btn-sm btn-danger" style="border-radius:10px;" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
+<table class="table table-success">
+    <thead>
+        <tr>
+            <th class="p-3 mb-2 bg-secondary text-white">
+                @Html.ActionLink("State", "Index", new { sortField = "StateName", currentSortField = ViewBag.SortField, currentSortOrder = ViewBag.SortOrder }, new { @class = "linkclass" })
+                @* @Html.DisplayNameFor(model => model.StateName) *@
+            </th>
+            <th class="p-3 mb-2 bg-secondary text-white">
+                @Html.ActionLink("Capital", "Index", new { sortField = "Capital", currentSortField = ViewBag.SortField, currentSortOrder = ViewBag.SortOrder }, new { @class = "linkclass" })
+                @* @Html.DisplayNameFor(model => model.Capital) *@
+            </th>
+            <th class="p-3 mb-2 bg-secondary text-white">
+               @*  @Html.ActionLink("Country", "Index", new { sortField = "Country.CountryName", currentSortField = ViewBag.SortField, currentSortOrder = ViewBag.SortOrder }, new { @class = "linkclass" }) *@
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th class="p-3 mb-2 bg-secondary text-white"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capital)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country.CountryName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

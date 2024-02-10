@@ -1,0 +1,29 @@
+﻿@model PersonalContact.Models.Country
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Country Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CountryName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CountryName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Capital)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Capital)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
