@@ -24,7 +24,7 @@ namespace PersonalContact.Controllers
         public async Task<IActionResult> Index(string sortField, string currentSortField, string currentSortOrder, string searchText = "", int pg = 1)
         {
             //return View(await _context.Countries.ToListAsync());
-            const int pageSize = 10;
+            const int pageSize = 14;
             List<Country> countries;
 
             if (searchText != "" && searchText != null)
